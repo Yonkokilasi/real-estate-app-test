@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:real_estate_app/gen/assets.gen.dart';
 import 'package:real_estate_app/screens/bottom_nav_pages/home_screen.dart';
 import 'package:real_estate_app/utils/app_colors.dart';
 import 'package:real_estate_app/utils/app_theme.dart';
@@ -12,7 +13,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int selectedBottomNavIndex = 0;
+  int selectedBottomNavIndex = 2;
   static final List<Widget> _pages = <Widget>[
     Container(),
     Container(),
@@ -34,6 +35,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       extendBody: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -58,7 +60,7 @@ class _HomeState extends State<Home> {
           currentIndex: selectedBottomNavIndex,
           type: BottomNavigationBarType.fixed,
           selectedItemColor: kPrimaryColor,
-            showSelectedLabels: false,
+          showSelectedLabels: false,
           showUnselectedLabels: false,
           unselectedItemColor: const Color(0xff9E9E9E),
           items: <BottomNavigationBarItem>[
@@ -77,9 +79,9 @@ class _HomeState extends State<Home> {
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: getColor(selectedBottomNavIndex, 0),
+              icon: Assets.icons.homeSvg.svg(
+                height: 30,
+                color: getColor(selectedBottomNavIndex, 2),
               ),
               label: '',
             ),

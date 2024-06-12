@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:real_estate_app/app/app.router.dart';
 import 'package:real_estate_app/utils/app_theme.dart';
 
-import 'screens/home.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class RealEstateApp extends StatefulWidget {
   const RealEstateApp({super.key});
@@ -17,7 +18,8 @@ class _RealEstateAppState extends State<RealEstateApp> {
       title: 'Real Estate App',
       theme: Pallete.lightModeAppTheme,
       debugShowCheckedModeBanner: false,
-      home: const Home(),
+      navigatorKey: StackedService.navigatorKey,
+      onGenerateRoute: StackedRouter().onGenerateRoute,
     );
   }
 }
