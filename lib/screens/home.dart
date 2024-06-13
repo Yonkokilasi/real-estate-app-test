@@ -35,7 +35,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Pallete.lightGrey,
       resizeToAvoidBottomInset: false,
       extendBody: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -67,13 +67,13 @@ class _HomeState extends State<Home> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.search,
-                color: getColor(selectedBottomNavIndex, 1),
+                color: getColor(selectedBottomNavIndex, 0),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.message,
+                Icons.sms,
                 color: getColor(selectedBottomNavIndex, 1),
               ),
               label: '',
@@ -87,15 +87,15 @@ class _HomeState extends State<Home> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.monitor_heart_outlined,
-                color: getColor(selectedBottomNavIndex, 2),
+                Icons.favorite,
+                color: getColor(selectedBottomNavIndex, 3),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.person,
-                color: getColor(selectedBottomNavIndex, 2),
+                color: getColor(selectedBottomNavIndex, 4),
               ),
               label: '',
             )
