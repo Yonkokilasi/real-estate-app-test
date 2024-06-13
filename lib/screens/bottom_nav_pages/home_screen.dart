@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:real_estate_app/utils/app_colors.dart';
+import 'package:real_estate_app/utils/app_theme.dart';
 import 'package:real_estate_app/utils/ui_utils.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -27,6 +28,7 @@ List<String> apartmentInteriors = [
 // background-image: linear-gradient(180deg, #ffffff 0%, #f9ecde 50%, #f9d8b1 100%);
 
 class _HomeScreenState extends State<HomeScreen> {
+  TextTheme get textTheme => Theme.of(context).textTheme;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -58,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Container(
                       padding: const EdgeInsets.all(13),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Pallete.whiteColor,
                         borderRadius: BorderRadius.circular(14),
                       ),
                       child: const Row(
@@ -127,11 +129,108 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 35,
             ),
+            // circular container
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  Container(
+                    height: 0.21.sh,
+                    width: 0.21.sh,
+                    decoration: BoxDecoration(
+                      color: kPrimaryColor.withOpacity(0.7),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            'BUY',
+                            style: textTheme.bodyMedium?.copyWith(
+                              color: Pallete.whiteColor,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30.h,
+                          ),
+                          Text(
+                            '1 034',
+                            style: textTheme.displayLarge?.copyWith(
+                              color: Pallete.whiteColor,
+                              fontSize: 35,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            'offers',
+                            style: textTheme.bodyMedium?.copyWith(
+                              color: Pallete.whiteColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  Container(
+                    height: 0.21.sh,
+                    width: 0.2.sh,
+                    decoration: BoxDecoration(
+                      color: Pallete.whiteColor,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: Center(
+                        child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          'RENT',
+                          style: textTheme.bodyMedium?.copyWith(
+                            color: kAccent,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        Text(
+                          '2 212',
+                          style: textTheme.displayLarge?.copyWith(
+                            color: kAccent,
+                            fontSize: 35,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          'offers',
+                          style: textTheme.bodyMedium?.copyWith(
+                            color: kAccent,
+                          ),
+                        ),
+                      ],
+                    )),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 35,
+            ),
             Container(
-              height: 1.5.sh,
+              height: 0.76.sh,
               width: 1.sw,
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: Pallete.whiteColor,
                 // top corner with border radius
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(35),
@@ -145,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 180.h,
                     margin: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Pallete.whiteColor,
                       borderRadius: BorderRadius.circular(30),
                       image: DecorationImage(
                           image: NetworkImage(apartmentInteriors.first),
@@ -167,7 +266,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 260.h,
                           borderRadius: 20,
                           margin: const EdgeInsets.only(right: 3),
-                          imageUrl: apartmentInteriors.last,
+                          // TODO change to last image
+                          imageUrl: apartmentInteriors[2],
                         ),
                         const SizedBox(
                           width: 4,
@@ -177,7 +277,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             getCachedNetworkImage(
                               context: context,
                               width: 0.47.sw,
-                              height: 130.h,
+                              height: 135.h,
                               borderRadius: 20,
                               margin: const EdgeInsets.only(bottom: 12),
                               imageUrl: apartmentInteriors[3],
@@ -185,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             getCachedNetworkImage(
                               context: context,
                               width: 0.47.sw,
-                              height: 130.h,
+                              height: 135.h,
                               borderRadius: 20,
                               margin: const EdgeInsets.only(bottom: 12),
                               imageUrl: apartmentInteriors[1],
