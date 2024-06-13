@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:real_estate_app/app/app.router.dart';
 import 'package:real_estate_app/utils/app_theme.dart';
 
@@ -14,12 +15,14 @@ class RealEstateApp extends StatefulWidget {
 class _RealEstateAppState extends State<RealEstateApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Real Estate App',
-      theme: Pallete.lightModeAppTheme,
-      debugShowCheckedModeBanner: false,
-      navigatorKey: StackedService.navigatorKey,
-      onGenerateRoute: StackedRouter().onGenerateRoute,
+    return ScreenUtilInit(
+      child: MaterialApp(
+        title: 'Real Estate App',
+        theme: Pallete.lightModeAppTheme,
+        debugShowCheckedModeBanner: false,
+        navigatorKey: StackedService.navigatorKey,
+        onGenerateRoute: StackedRouter().onGenerateRoute,
+      ),
     );
   }
 }
