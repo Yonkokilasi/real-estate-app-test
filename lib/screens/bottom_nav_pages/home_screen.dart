@@ -1,3 +1,4 @@
+import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -156,8 +157,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(
                             height: 30.h,
                           ),
-                          Text(
-                            '1 034',
+                          Countup(
+                            begin: 0,
+                            end: 1034,
+                            duration: Duration(seconds: 3),
+                            separator: ' ',
                             style: textTheme.displayLarge?.copyWith(
                               color: Pallete.whiteColor,
                               fontSize: 35,
@@ -201,8 +205,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(
                           height: 30.h,
                         ),
-                        Text(
-                          '2 212',
+                        Countup(
+                          begin: 0,
+                          end: 2212,
+                          duration: Duration(seconds: 3),
+                          separator: ' ',
                           style: textTheme.displayLarge?.copyWith(
                             color: kAccent,
                             fontSize: 35,
