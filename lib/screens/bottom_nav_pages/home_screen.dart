@@ -227,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 35,
             ),
             Container(
-              height: 0.76.sh,
+              height: 0.79.sh,
               width: 1.sw,
               decoration: const BoxDecoration(
                 color: Pallete.whiteColor,

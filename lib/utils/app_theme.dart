@@ -14,6 +14,7 @@ class Pallete {
         color: whiteColor,
       ),
     ),
+    iconTheme: const IconThemeData(color: Pallete.whiteColor),
     primaryColor: kPrimaryColor,
     textTheme: const TextTheme(
       displayLarge: TextStyle(

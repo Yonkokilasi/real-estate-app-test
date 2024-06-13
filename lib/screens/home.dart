@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
   }
 
   Color getColor(int index, int currentIndex) {
-    return index == currentIndex ? kPrimaryColor : Pallete.whiteColor;
+    return index == currentIndex ? kPrimaryColor : Colors.black;
   }
 
   @override
@@ -65,37 +65,68 @@ class _HomeState extends State<Home> {
           unselectedItemColor: const Color(0xff9E9E9E),
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.search,
-                color: getColor(selectedBottomNavIndex, 0),
+              icon: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: getColor(selectedBottomNavIndex, 0),
+                    shape: BoxShape.circle),
+                child: const Icon(
+                  Icons.search,
+                  color: Pallete.whiteColor,
+                ),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.sms,
-                color: getColor(selectedBottomNavIndex, 1),
+              icon: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: getColor(selectedBottomNavIndex, 1),
+                    shape: BoxShape.circle),
+                child: const Icon(
+                  Icons.sms,
+                  color: Colors.white,
+                ),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Assets.icons.homeSvg.svg(
-                height: 30,
-                color: getColor(selectedBottomNavIndex, 2),
+              icon: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: getColor(selectedBottomNavIndex, 2),
+                    shape: BoxShape.circle),
+                child: Assets.icons.homeSvg.svg(
+                  height: 30,
+                  colorFilter:
+                      const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                ),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.favorite,
-                color: getColor(selectedBottomNavIndex, 3),
+              icon: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: getColor(selectedBottomNavIndex, 3),
+                    shape: BoxShape.circle),
+                child: const Icon(
+                  Icons.favorite,
+                  color: Colors.white,
+                ),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person,
-                color: getColor(selectedBottomNavIndex, 4),
+              icon: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: getColor(selectedBottomNavIndex, 4),
+                    shape: BoxShape.circle),
+                child: const Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
               ),
               label: '',
             )
