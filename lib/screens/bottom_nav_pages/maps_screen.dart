@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -9,8 +8,6 @@ import 'package:real_estate_app/gen/assets.gen.dart';
 import 'package:real_estate_app/utils/app_colors.dart';
 import 'package:real_estate_app/utils/app_theme.dart';
 import 'package:real_estate_app/utils/maps_styling.dart';
-import 'package:real_estate_app/utils/ui_utils.dart';
-import 'package:image/image.dart' as img;
 import 'package:stacked/stacked.dart';
 
 import '../../viewmodels/map_viewmodel.dart';
@@ -34,37 +31,6 @@ class MapsScreenState extends State<MapsScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _loadCustomMarker();
-    });
-  }
-
-  BitmapDescriptor? customIcon;
-  Future<void> _loadCustomMarker() async {
-    try {
-      // Load the image from assets
-      final ByteData byteData = await DefaultAssetBundle.of(context)
-          .load('assets/icons/orange_container.png');
-      final Uint8List imageData = byteData.buffer.asUint8List();
-
-      // Decode the image
-      img.Image? originalImage = img.decodeImage(imageData);
-
-      // Resize the image (increase the size)
-      img.Image resizedImage =
-          img.copyResize(originalImage!, width: 125, height: 125);
-
-      // Convert the image to a Uint8List
-      final Uint8List resizedImageData =
-          Uint8List.fromList(img.encodePng(resizedImage));
-
-      // Create a BitmapDescriptor from the resized image
-      customIcon = BitmapDescriptor.fromBytes(resizedImageData);
-      setState(() {});
-    } catch (e, stackTrace) {
-      logThis(' ************** failed to load custom marker: $e');
-      logThis('stackTrace is $stackTrace');
-    }
   }
 
   @override
@@ -72,7 +38,12 @@ class MapsScreenState extends State<MapsScreen> {
     TextTheme textTheme = Theme.of(context).textTheme;
     return ViewModelBuilder<MapViewModel>.reactive(
       viewModelBuilder: () => MapViewModel(),
-      onViewModelReady: (viewModel) {},
+      onViewModelReady: (viewModel) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          viewModel.loadCustomMarker(context);
+          setState(() {});
+        });
+      },
       builder: (BuildContext context, MapViewModel viewModel, Widget? child) {
         return Stack(
           children: [
@@ -81,7 +52,7 @@ class MapsScreenState extends State<MapsScreen> {
                 buildingsEnabled: false,
                 zoomControlsEnabled: false,
                 mapType: MapType.normal,
-                markers: viewModel.getMarkers(customIcon),
+                markers: viewModel.getMarkers(),
                 initialCameraPosition: _kGooglePlex,
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);
@@ -266,7 +237,7 @@ class MapsScreenState extends State<MapsScreen> {
                   elevation: 2,
                   // on selected we show the dialog box
                   onSelected: (value) {
-                    viewModel.onMenuItemSelected(value);
+                    viewModel.onMenuItemSelected(value, context: context);
                   },
                 ),
               ),

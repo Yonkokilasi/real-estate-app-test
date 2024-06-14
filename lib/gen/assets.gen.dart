@@ -45,6 +45,14 @@ class $AssetsIconsGen {
   SvgGenImage get orangeContainerSvg =>
       const SvgGenImage('assets/icons/orange_container.svg');
 
+  /// File path: assets/icons/price_marker.png
+  AssetGenImage get priceMarkerPng =>
+      const AssetGenImage('assets/icons/price_marker.png');
+
+  /// File path: assets/icons/price_marker.svg
+  SvgGenImage get priceMarkerSvg =>
+      const SvgGenImage('assets/icons/price_marker.svg');
+
   /// File path: assets/icons/wallet.svg
   SvgGenImage get wallet => const SvgGenImage('assets/icons/wallet.svg');
 
@@ -58,6 +66,8 @@ class $AssetsIconsGen {
         layerGroup,
         orangeContainerPng,
         orangeContainerSvg,
+        priceMarkerPng,
+        priceMarkerSvg,
         wallet
       ];
 }
