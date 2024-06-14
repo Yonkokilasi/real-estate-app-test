@@ -15,14 +15,37 @@ import 'package:vector_graphics/vector_graphics.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/configuration.svg
+  SvgGenImage get configuration =>
+      const SvgGenImage('assets/icons/configuration.svg');
+
+  /// File path: assets/icons/custom_marker_icon.png
+  AssetGenImage get customMarkerIcon =>
+      const AssetGenImage('assets/icons/custom_marker_icon.png');
+
   /// File path: assets/icons/home.png
   AssetGenImage get homePng => const AssetGenImage('assets/icons/home.png');
 
   /// File path: assets/icons/home.svg
   SvgGenImage get homeSvg => const SvgGenImage('assets/icons/home.svg');
 
+  /// File path: assets/icons/orange_container.png
+  AssetGenImage get orangeContainerPng =>
+      const AssetGenImage('assets/icons/orange_container.png');
+
+  /// File path: assets/icons/orange_container.svg
+  SvgGenImage get orangeContainerSvg =>
+      const SvgGenImage('assets/icons/orange_container.svg');
+
   /// List of all assets
-  List<dynamic> get values => [homePng, homeSvg];
+  List<dynamic> get values => [
+        configuration,
+        customMarkerIcon,
+        homePng,
+        homeSvg,
+        orangeContainerPng,
+        orangeContainerSvg
+      ];
 }
 
 class Assets {

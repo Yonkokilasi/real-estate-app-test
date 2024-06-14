@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:real_estate_app/gen/assets.gen.dart';
 import 'package:real_estate_app/screens/bottom_nav_pages/home_screen.dart';
+import 'package:real_estate_app/screens/bottom_nav_pages/maps_screen.dart';
 import 'package:real_estate_app/utils/app_colors.dart';
 import 'package:real_estate_app/utils/app_theme.dart';
 
@@ -15,7 +16,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int selectedBottomNavIndex = 2;
   static final List<Widget> _pages = <Widget>[
-    Container(),
+    const MapsScreen(),
     Container(),
     const HomeScreen(),
     Container(),

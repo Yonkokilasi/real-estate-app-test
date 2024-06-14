@@ -137,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Container(
                     height: 0.21.sh,
-                    width: 0.21.sh,
+                    width: 0.2.sh,
                     decoration: BoxDecoration(
                       color: kPrimaryColor.withOpacity(0.7),
                       shape: BoxShape.circle,
@@ -160,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Countup(
                             begin: 0,
                             end: 1034,
-                            duration: Duration(seconds: 3),
+                            duration: const Duration(seconds: 3),
                             separator: ' ',
                             style: textTheme.displayLarge?.copyWith(
                               color: Pallete.whiteColor,
@@ -181,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SizedBox(
-                    width: 12,
+                    width: 10,
                   ),
                   Container(
                     height: 0.21.sh,
@@ -208,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Countup(
                           begin: 0,
                           end: 2212,
-                          duration: Duration(seconds: 3),
+                          duration: const Duration(seconds: 3),
                           separator: ' ',
                           style: textTheme.displayLarge?.copyWith(
                             color: kAccent,
@@ -273,7 +273,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 260.h,
                           borderRadius: 20,
                           margin: const EdgeInsets.only(right: 3),
-                          // TODO change to last image
                           imageUrl: apartmentInteriors[2],
                         ),
                         const SizedBox(
