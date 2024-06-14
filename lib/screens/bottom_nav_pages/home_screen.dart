@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:real_estate_app/utils/app_colors.dart';
 import 'package:real_estate_app/utils/app_theme.dart';
 import 'package:real_estate_app/utils/ui_utils.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -77,53 +78,55 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                  ),
+                  )
+                      .animate()
+                      .fadeIn(
+                          duration: 3000.ms, curve: Curves.easeIn, begin: 0.0)
+                      .slide(
+                        delay: 800.ms,
+                        curve: Curves.easeIn,
+                        begin: const Offset(-1.0, 0.0),
+                        end: Offset.zero,
+                      ),
                   const Spacer(),
-                  // CircleAvatar(
-                  //   radius: 30,
-                  //   //  backgroundColor: Colors.grey,
-                  //   child: ClipRRect(
-                  //     borderRadius: BorderRadius.circular(100),
-                  //     child: FadeInImage.assetNetwork(
-                  //       placeholder: 'https://via.placeholder.com/150',
-                  //       image:
-                  //           'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                  //       fit: BoxFit.contain,
-                  //       width: 60,
-                  //       height: 60,
-                  //     ),
-                  //   ),
-                  // ),
                   CircleAvatar(
                     radius: 28,
+                    //TODO use cached network image
                     foregroundImage: NetworkImage(
                       potentialPortraits.first,
                     ),
-                  ),
+                  ).animate().slide(duration: 3000.ms).scale(delay: 500.ms),
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(
+            Padding(
+              padding: const EdgeInsets.only(
                 left: 20,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
-                  Text(
+                  const Text(
                     'Hi, Marina',
                     style: TextStyle(fontSize: 22.5, color: kAccent),
-                  ),
-                  Text(
+                  ).animate().fadeIn(duration: 1000.ms).show(delay: 1000.ms),
+                  const Text(
                     'let\'s select your \nperfect place',
                     style: TextStyle(
                         fontSize: 35,
                         color: kSecondary,
                         fontWeight: FontWeight.w400),
-                  ),
+                  )
+                      .animate()
+                      .fadeIn(
+                        duration: 500.ms,
+                        curve: Curves.easeIn,
+                        begin: 0.0,
+                      )
+                      .slideY(begin: -1.0, end: 0.0, delay: 2500.ms),
                 ],
               ),
             ),
@@ -160,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Countup(
                             begin: 0,
                             end: 1034,
-                            duration: const Duration(seconds: 3),
+                            duration: const Duration(seconds: 6),
                             separator: ' ',
                             style: textTheme.displayLarge?.copyWith(
                               color: Pallete.whiteColor,
@@ -179,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                  ),
+                  ).animate().fade(duration: 1200.ms).scale(delay: 2700.ms),
                   const SizedBox(
                     width: 10,
                   ),
@@ -208,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Countup(
                           begin: 0,
                           end: 2212,
-                          duration: const Duration(seconds: 3),
+                          duration: const Duration(seconds: 6),
                           separator: ' ',
                           style: textTheme.displayLarge?.copyWith(
                             color: kAccent,
@@ -226,7 +229,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     )),
-                  ),
+                  ).animate().fade(duration: 1200.ms).scale(delay: 2700.ms),
                 ],
               ),
             ),
@@ -304,6 +307,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             )
+                .animate()
+                .fadeIn(duration: 2000.ms, curve: Curves.easeIn, begin: 0.0)
+                .slide(
+                  begin: const Offset(0.0, 1.0),
+                  end: Offset.zero,
+                  curve: Curves.easeIn,
+                  delay: 2500.ms,
+                ),
           ],
         ),
       ),
