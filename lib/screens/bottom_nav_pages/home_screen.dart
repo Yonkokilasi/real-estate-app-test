@@ -1,7 +1,9 @@
 import 'package:countup/countup.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:real_estate_app/screens/bottom_nav_pages/home_item.dart';
 import 'package:real_estate_app/utils/app_colors.dart';
 import 'package:real_estate_app/utils/app_theme.dart';
 import 'package:real_estate_app/utils/ui_utils.dart';
@@ -18,19 +20,36 @@ List<String> potentialPortraits = [
   'https://images.unsplash.com/photo-1540331547168-8b63109225b7?q=80&w=2165&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   'https://images.unsplash.com/photo-1540331547168-8b63109225b7?q=80&w=2165&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 ];
-List<String> apartmentInteriors = [
-  'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  'https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  'https://images.unsplash.com/photo-1615529182904-14819c35db37?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  'https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-];
 
 // background-color: #ffffff;
 // background-image: linear-gradient(180deg, #ffffff 0%, #f9ecde 50%, #f9d8b1 100%);
 
 class _HomeScreenState extends State<HomeScreen> {
+  double opacity = 0.9;
+  bool invisibleContainerVisibility = true;
+  bool perfectPlaceVisibility = false;
   TextTheme get textTheme => Theme.of(context).textTheme;
+  @override
+  void initState() {
+    super.initState();
+    changeOpacity();
+  }
+
+  changeOpacity() {
+    Future.delayed(const Duration(seconds: 1), () {
+      setState(() {
+        opacity = opacity == 0.0 ? 0.9 : 0.0;
+        perfectPlaceVisibility = true;
+      });
+    });
+    Future.delayed(const Duration(seconds: 4), () {
+      setState(() {
+        invisibleContainerVisibility = false;
+        perfectPlaceVisibility = true;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -113,20 +132,35 @@ class _HomeScreenState extends State<HomeScreen> {
                     'Hi, Marina',
                     style: TextStyle(fontSize: 22.5, color: kAccent),
                   ).animate().fadeIn(duration: 1000.ms).show(delay: 1000.ms),
-                  const Text(
-                    'let\'s select your \nperfect place',
-                    style: TextStyle(
-                        fontSize: 35,
-                        color: kSecondary,
-                        fontWeight: FontWeight.w400),
-                  )
-                      .animate()
-                      .fadeIn(
-                        duration: 500.ms,
-                        curve: Curves.easeIn,
-                        begin: 0.0,
-                      )
-                      .slideY(begin: -1.0, end: 0.0, delay: 2500.ms),
+                  Visibility(
+                    visible: perfectPlaceVisibility,
+                    child: const Text(
+                      'let\'s select your \nperfect place',
+                      style: TextStyle(
+                          fontSize: 35,
+                          color: kSecondary,
+                          fontWeight: FontWeight.w400),
+                    )
+                        .animate()
+                        .fadeIn(
+                          duration: 500.ms,
+                          curve: Curves.easeIn,
+                          begin: 0.0,
+                        )
+                        .slideY(begin: 1.0, end: 0.0, delay: 2000.ms),
+                  ),
+                  Visibility(
+                    visible: invisibleContainerVisibility,
+                    child: AnimatedOpacity(
+                      opacity: opacity,
+                      duration: const Duration(seconds: 4),
+                      child: Container(
+                        width: 250.w,
+                        height: 100,
+                        color: const Color(0xFFF9ECDE),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -270,11 +304,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        getCachedNetworkImage(
-                          context: context,
+                        HouseItem(
                           width: 0.47.sw,
                           height: 260.h,
                           borderRadius: 20,
+                          houseName: 'Gubina St,. 11',
                           margin: const EdgeInsets.only(right: 3),
                           imageUrl: apartmentInteriors[2],
                         ),
@@ -283,16 +317,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Column(
                           children: [
-                            getCachedNetworkImage(
-                              context: context,
+                            HouseItem(
                               width: 0.47.sw,
                               height: 135.h,
                               borderRadius: 20,
+                              houseName: 'Trefoleva St,. 43',
                               margin: const EdgeInsets.only(bottom: 12),
                               imageUrl: apartmentInteriors[3],
                             ),
-                            getCachedNetworkImage(
-                              context: context,
+                            HouseItem(
+                              houseName: 'Sedova St,. 22',
                               width: 0.47.sw,
                               height: 135.h,
                               borderRadius: 20,
