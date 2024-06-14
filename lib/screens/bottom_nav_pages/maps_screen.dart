@@ -11,6 +11,9 @@ import 'package:real_estate_app/utils/app_theme.dart';
 import 'package:real_estate_app/utils/maps_styling.dart';
 import 'package:real_estate_app/utils/ui_utils.dart';
 import 'package:image/image.dart' as img;
+import 'package:stacked/stacked.dart';
+
+import '../../viewmodels/map_viewmodel.dart';
 
 class MapsScreen extends StatefulWidget {
   const MapsScreen({super.key});
@@ -28,11 +31,6 @@ class MapsScreenState extends State<MapsScreen> {
     zoom: 10.41,
   );
 
-  static const CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(59.8175, 30.5936),
-      tilt: 59.440717697143555,
-      zoom: 15.151926040649414);
   @override
   void initState() {
     super.initState();
@@ -72,266 +70,229 @@ class MapsScreenState extends State<MapsScreen> {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
-    return Stack(
-      children: [
-        Positioned(
-          child: GoogleMap(
-            buildingsEnabled: false,
-            zoomControlsEnabled: false,
-            mapType: MapType.normal,
-            markers: customIcon == null
-                ? Set()
-                : {
-                    Marker(
-                      markerId: const MarkerId('1'),
-                      position: const LatLng(59.8175, 30.5936),
-                      infoWindow: const InfoWindow(
-                          title: 'Saint Petersburg', snippet: '5.0'),
-                      icon: customIcon!,
+    return ViewModelBuilder<MapViewModel>.reactive(
+      viewModelBuilder: () => MapViewModel(),
+      onViewModelReady: (viewModel) {},
+      builder: (BuildContext context, MapViewModel viewModel, Widget? child) {
+        return Stack(
+          children: [
+            Positioned(
+              child: GoogleMap(
+                buildingsEnabled: false,
+                zoomControlsEnabled: false,
+                mapType: MapType.normal,
+                markers: viewModel.getMarkers(customIcon),
+                initialCameraPosition: _kGooglePlex,
+                onMapCreated: (GoogleMapController controller) {
+                  _controller.complete(controller);
+                  controller.setMapStyle(mapsStylingJson);
+                },
+              ),
+            ),
+            Positioned(
+              top: 20.h,
+              left: 30,
+              child: Row(
+                children: [
+                  // search box
+                  SizedBox(
+                    width: 0.68.sw,
+                    height: 50,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Saint Petersburg',
+                        contentPadding: const EdgeInsets.all(12),
+                        hintStyle: textTheme.bodySmall
+                            ?.copyWith(color: kSecondary, fontSize: 14),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        filled: true,
+                        fillColor: Pallete.whiteColor,
+                        prefixIcon: const Icon(Icons.search),
+                      ),
                     ),
-                    Marker(
-                      markerId: const MarkerId('2'),
-                      position: const LatLng(59.9505, 30.5936),
-                      infoWindow: const InfoWindow(
-                          title: 'North of Original', snippet: '5.0'),
-                      icon: customIcon!,
-                    ),
-                    Marker(
-                      markerId: const MarkerId('3'),
-                      position: const LatLng(59.6845, 30.5936),
-                      infoWindow: const InfoWindow(
-                          title: 'South of Original', snippet: '5.0'),
-                      icon: customIcon!,
-                    ),
-                    Marker(
-                      markerId: const MarkerId('4'),
-                      position: const LatLng(59.8175, 30.8982),
-                      infoWindow: const InfoWindow(
-                          title: 'East of Original', snippet: '5.0'),
-                      icon: customIcon!,
-                    ),
-                    Marker(
-                      markerId: const MarkerId('5'),
-                      position: const LatLng(59.8175, 30.4450),
-                      infoWindow: const InfoWindow(
-                          title: 'West of Original', snippet: '5.0'),
-                      icon: customIcon!,
-                    ),
-                    Marker(
-                      markerId: const MarkerId('6'),
-                      position: const LatLng(59.8840, 30.7624),
-                      infoWindow: const InfoWindow(
-                          title: 'Northeast of Original', snippet: '5.0'),
-                      icon: customIcon!,
-                    ),
-                  },
-            initialCameraPosition: _kGooglePlex,
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-
-              controller.setMapStyle(mapsStylingJson);
-            },
-          ),
-        ),
-        Positioned(
-          top: 20.h,
-          left: 30,
-          child: Row(
-            children: [
-              // search box
-              SizedBox(
-                width: 0.68.sw,
-                height: 50,
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Saint Petersburg',
-                    contentPadding: const EdgeInsets.all(12),
-                    hintStyle: textTheme.bodySmall
-                        ?.copyWith(color: kSecondary, fontSize: 14),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    filled: true,
-                    fillColor: Pallete.whiteColor,
-                    prefixIcon: const Icon(Icons.search),
                   ),
+                  const SizedBox(
+                    width: 6,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.all(15),
+                    decoration: const BoxDecoration(
+                        color: Colors.white, shape: BoxShape.circle),
+                    child:
+                        Assets.icons.configuration.svg(width: 20, height: 20),
+                  )
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: 100.h,
+              right: 30,
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: const Color(0xff737373),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.sort,
+                      size: 20.0,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'List of variants',
+                      style: textTheme.bodyMedium?.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(
-                width: 6,
-              ),
-              Container(
-                margin: const EdgeInsets.only(left: 10),
-                padding: const EdgeInsets.all(15),
-                decoration: const BoxDecoration(
-                    color: Colors.white, shape: BoxShape.circle),
-                child: Assets.icons.configuration.svg(width: 20, height: 20),
-              )
-            ],
-          ),
-        ),
-        Positioned(
-          bottom: 100.h,
-          right: 30,
-          child: Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: const Color(0xff737373),
-              borderRadius: BorderRadius.circular(20),
             ),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.sort,
+            Positioned(
+              bottom: 150.h,
+              left: 30,
+              child: FloatingActionButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                onPressed: () {},
+                materialTapTargetSize: MaterialTapTargetSize.padded,
+                backgroundColor: const Color(0xff737373),
+                child: PopupMenuButton<int>(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  icon: viewModel.currentMenuIcon,
+                  itemBuilder: (context) => [
+                    // PopupMenuItem 1
+                    PopupMenuItem(
+                      value: 1,
+                      // row with 2 children
+                      child: Row(
+                        children: [
+                          Icon(Icons.verified_user,
+                              color: viewModel.getIconColor(0)),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Cosy Areas",
+                            style: textTheme.bodyMedium?.copyWith(
+                              color: viewModel.getIconColor(0),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    // PopupMenuItem 2
+                    PopupMenuItem(
+                      value: 2,
+                      // row with two children
+                      child: Row(
+                        children: [
+                          Assets.icons.wallet.svg(
+                            width: 20,
+                            height: 20,
+                            colorFilter: ColorFilter.mode(
+                                viewModel.getIconColor(1), BlendMode.srcIn),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Price",
+                            style: textTheme.bodyMedium?.copyWith(
+                              color: viewModel.getIconColor(1),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: 3,
+                      // row with two children
+                      child: Row(
+                        children: [
+                          Assets.icons.basketShopping.svg(
+                              width: 20,
+                              height: 20,
+                              colorFilter: ColorFilter.mode(
+                                  viewModel.getIconColor(2), BlendMode.srcIn)),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Infrastructure",
+                            style: textTheme.bodyMedium?.copyWith(
+                              color: viewModel.getIconColor(2),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: 4,
+                      // row with two children
+                      child: Row(
+                        children: [
+                          Assets.icons.layerGroup.svg(
+                              width: 20,
+                              height: 20,
+                              colorFilter: ColorFilter.mode(
+                                  viewModel.getIconColor(3), BlendMode.srcIn)),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Without any layer",
+                            style: textTheme.bodyMedium?.copyWith(
+                              color: viewModel.getIconColor(3),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                  offset: const Offset(-5, -155),
+                  color: Pallete.cardBackground,
+                  elevation: 2,
+                  // on selected we show the dialog box
+                  onSelected: (value) {
+                    viewModel.onMenuItemSelected(value);
+                  },
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 100.h,
+              left: 30,
+              child: FloatingActionButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                onPressed: () {
+                  viewModel.goToTheLake(_controller);
+                },
+                materialTapTargetSize: MaterialTapTargetSize.padded,
+                backgroundColor: const Color(0xff737373),
+                child: const Icon(
+                  Icons.near_me,
                   size: 20.0,
                   color: Colors.white,
                 ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  'List of variants',
-                  style: textTheme.bodyMedium?.copyWith(
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Positioned(
-          bottom: 150.h,
-          left: 30,
-          child: FloatingActionButton(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50),
-            ),
-            onPressed: () {},
-            materialTapTargetSize: MaterialTapTargetSize.padded,
-            backgroundColor: const Color(0xff737373),
-            child: PopupMenuButton<int>(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
               ),
-              icon: const Icon(Icons.filter_list),
-              itemBuilder: (context) => [
-                // PopupMenuItem 1
-                PopupMenuItem(
-                  value: 1,
-                  // row with 2 children
-                  child: Row(
-                    children: [
-                      const Icon(Icons.security, color: kSecondary),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "Cosy Areas",
-                        style: textTheme.bodyMedium?.copyWith(
-                          color: kSecondary,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                // PopupMenuItem 2
-                PopupMenuItem(
-                  value: 2,
-                  // row with two children
-                  child: Row(
-                    children: [
-                      const Icon(Icons.chrome_reader_mode, color: kSecondary),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "Price",
-                        style: textTheme.bodyMedium?.copyWith(
-                          color: kSecondary,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 3,
-                  // row with two children
-                  child: Row(
-                    children: [
-                      const Icon(Icons.chrome_reader_mode, color: kSecondary),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "Infrastructure",
-                        style: textTheme.bodyMedium?.copyWith(
-                          color: kSecondary,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 4,
-                  // row with two children
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.chrome_reader_mode,
-                        color: kSecondary,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "Without any layer",
-                        style: textTheme.bodyMedium?.copyWith(
-                          color: kSecondary,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-              offset: const Offset(-5, -155),
-              color: Pallete.cardBackground,
-              elevation: 2,
-              // on selected we show the dialog box
-              onSelected: (value) {
-                // if value 1 show dialog
-                if (value == 1) {
-                  logThis('selected 1');
-                  // if value 2 show dialog
-                } else if (value == 2) {
-                  logThis('selected 2');
-                }
-              },
             ),
-          ),
-        ),
-        Positioned(
-          bottom: 100.h,
-          left: 30,
-          child: FloatingActionButton(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50),
-            ),
-            onPressed: _goToTheLake,
-            materialTapTargetSize: MaterialTapTargetSize.padded,
-            backgroundColor: const Color(0xff737373),
-            child: const Icon(
-              Icons.near_me,
-              size: 20.0,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ],
+          ],
+        );
+      },
     );
-  }
-
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    await controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 }
