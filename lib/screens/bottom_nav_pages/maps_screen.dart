@@ -25,14 +25,14 @@ class MapsScreenState extends State<MapsScreen> {
 
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(59.8175, 30.5936),
-    zoom: 10.0,
+    zoom: 10.41,
   );
 
   static const CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
-      target: LatLng(59.911, 30.3),
+      target: LatLng(59.8175, 30.5936),
       tilt: 59.440717697143555,
-      zoom: 17.151926040649414);
+      zoom: 15.151926040649414);
   @override
   void initState() {
     super.initState();
@@ -206,13 +206,106 @@ class MapsScreenState extends State<MapsScreen> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(50),
             ),
-            onPressed: _goToTheLake,
+            onPressed: () {},
             materialTapTargetSize: MaterialTapTargetSize.padded,
             backgroundColor: const Color(0xff737373),
-            child: const Icon(
-              Icons.filter_list,
-              size: 20.0,
-              color: Colors.white,
+            child: PopupMenuButton<int>(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              icon: const Icon(Icons.filter_list),
+              itemBuilder: (context) => [
+                // PopupMenuItem 1
+                PopupMenuItem(
+                  value: 1,
+                  // row with 2 children
+                  child: Row(
+                    children: [
+                      const Icon(Icons.security, color: kSecondary),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Cosy Areas",
+                        style: textTheme.bodyMedium?.copyWith(
+                          color: kSecondary,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                // PopupMenuItem 2
+                PopupMenuItem(
+                  value: 2,
+                  // row with two children
+                  child: Row(
+                    children: [
+                      const Icon(Icons.chrome_reader_mode, color: kSecondary),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Price",
+                        style: textTheme.bodyMedium?.copyWith(
+                          color: kSecondary,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 3,
+                  // row with two children
+                  child: Row(
+                    children: [
+                      const Icon(Icons.chrome_reader_mode, color: kSecondary),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Infrastructure",
+                        style: textTheme.bodyMedium?.copyWith(
+                          color: kSecondary,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 4,
+                  // row with two children
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.chrome_reader_mode,
+                        color: kSecondary,
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Without any layer",
+                        style: textTheme.bodyMedium?.copyWith(
+                          color: kSecondary,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+              offset: const Offset(-5, -155),
+              color: Pallete.cardBackground,
+              elevation: 2,
+              // on selected we show the dialog box
+              onSelected: (value) {
+                // if value 1 show dialog
+                if (value == 1) {
+                  logThis('selected 1');
+                  // if value 2 show dialog
+                } else if (value == 2) {
+                  logThis('selected 2');
+                }
+              },
             ),
           ),
         ),

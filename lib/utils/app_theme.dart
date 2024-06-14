@@ -4,6 +4,7 @@ import 'package:real_estate_app/utils/app_colors.dart';
 class Pallete {
   static const whiteColor = Colors.white;
   static const lightGrey = Color(0xFFF8F8F8);
+  static const cardBackground = Color(0xFFFCF6EF);
 
   static var lightModeAppTheme = ThemeData.light().copyWith(
     scaffoldBackgroundColor: lightGrey,
@@ -14,6 +15,7 @@ class Pallete {
         color: whiteColor,
       ),
     ),
+    cardColor: cardBackground,
     iconTheme: const IconThemeData(color: Pallete.whiteColor),
     primaryColor: kPrimaryColor,
     textTheme: const TextTheme(
