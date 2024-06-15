@@ -1,7 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:countup/countup.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:real_estate_app/screens/bottom_nav_pages/home_item.dart';
 import 'package:real_estate_app/utils/app_colors.dart';
@@ -15,14 +14,6 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-
-List<String> potentialPortraits = [
-  'https://images.unsplash.com/photo-1540331547168-8b63109225b7?q=80&w=2165&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  'https://images.unsplash.com/photo-1540331547168-8b63109225b7?q=80&w=2165&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-];
-
-// background-color: #ffffff;
-// background-image: linear-gradient(180deg, #ffffff 0%, #f9ecde 50%, #f9d8b1 100%);
 
 class _HomeScreenState extends State<HomeScreen> {
   double opacity = 0.9;
@@ -107,17 +98,27 @@ class _HomeScreenState extends State<HomeScreen> {
                         end: Offset.zero,
                       ),
                   const Spacer(),
-                  CircleAvatar(
-                    radius: 28,
-                    //TODO use cached network image
-                    foregroundImage: NetworkImage(
-                      potentialPortraits.first,
+                  CachedNetworkImage(
+                    placeholder: (context, url) => Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: const DecorationImage(
+                          image: NetworkImage('https://via.placeholder.com/56'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
+                    imageBuilder: (context, imageProvider) => CircleAvatar(
+                      radius: 28,
+                      foregroundImage: imageProvider,
+                    ),
+                    imageUrl: potentialPortraits.first,
+                    fit: BoxFit.cover,
                   )
                       .animate()
                       .slide(duration: 1500.ms)
                       .scale()
-                      .then(delay: Duration(milliseconds: 100)),
+                      .then(delay: const Duration(milliseconds: 100)),
                 ],
               ),
             ),

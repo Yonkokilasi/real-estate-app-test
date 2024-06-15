@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:real_estate_app/utils/ui_utils.dart';
 
@@ -58,7 +57,7 @@ class HouseItem extends StatelessWidget {
                           children: [
                             SizedBox(width: 10.w),
                             Text(houseName),
-                            Spacer(),
+                            const Spacer(),
                             const CircleAvatar(
                               backgroundColor: Colors.white,
                               child: Icon(

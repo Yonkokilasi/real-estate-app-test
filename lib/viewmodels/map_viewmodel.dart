@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:ui' as ui;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -40,6 +39,7 @@ class MapViewModel extends BaseViewModel {
       ByteData byteData;
       if (loadPriceMarker) {
         byteData = await bitmapDescriptorFromSvgAsset(context, '\$500') ??
+            // ignore: use_build_context_synchronously
             await DefaultAssetBundle.of(context)
                 .load('assets/icons/orange_container.png');
       } else {
@@ -90,14 +90,15 @@ class MapViewModel extends BaseViewModel {
     return await image.toByteData(format: ui.ImageByteFormat.png);
   }
 
-  Future<void> goToTheLake(Completer<GoogleMapController> _controller) async {
-    const CameraPosition _kLake = CameraPosition(
+  Future<void> goToTheLake(
+      Completer<GoogleMapController> mapsController) async {
+    const CameraPosition river = CameraPosition(
         bearing: 192.8334901395799,
         target: LatLng(59.8175, 30.5936),
         tilt: 59.440717697143555,
         zoom: 15.151926040649414);
-    final GoogleMapController controller = await _controller.future;
-    await controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+    final GoogleMapController controller = await mapsController.future;
+    await controller.animateCamera(CameraUpdate.newCameraPosition(river));
   }
 
   Set<Marker> getMarkers() {
