@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:real_estate_app/gen/assets.gen.dart';
@@ -83,7 +84,13 @@ class MapsScreenState extends State<MapsScreen> {
                         prefixIcon: const Icon(Icons.search),
                       ),
                     ),
-                  ),
+                  )
+                      .animate()
+                      .fade(
+                        duration: 1800.ms,
+                        delay: 1000.ms,
+                      )
+                      .scale(delay: 1200.ms),
                   const SizedBox(
                     width: 6,
                   ),
@@ -95,6 +102,12 @@ class MapsScreenState extends State<MapsScreen> {
                     child:
                         Assets.icons.configuration.svg(width: 20, height: 20),
                   )
+                      .animate()
+                      .fade(
+                        duration: 1800.ms,
+                        delay: 1000.ms,
+                      )
+                      .scale(delay: 1000.ms),
                 ],
               ),
             ),
@@ -125,7 +138,13 @@ class MapsScreenState extends State<MapsScreen> {
                     ),
                   ],
                 ),
-              ),
+              )
+                  .animate()
+                  .fade(
+                    duration: 1800.ms,
+                    delay: 1000.ms,
+                  )
+                  .scale(delay: 1000.ms),
             ),
             Positioned(
               bottom: 150.h,
@@ -240,7 +259,13 @@ class MapsScreenState extends State<MapsScreen> {
                     viewModel.onMenuItemSelected(value, context: context);
                   },
                 ),
-              ),
+              )
+                  .animate()
+                  .fade(
+                    duration: 1800.ms,
+                    delay: 1000.ms,
+                  )
+                  .scale(delay: 1000.ms),
             ),
             Positioned(
               bottom: 100.h,
@@ -259,7 +284,13 @@ class MapsScreenState extends State<MapsScreen> {
                   size: 20.0,
                   color: Colors.white,
                 ),
-              ),
+              )
+                  .animate()
+                  .fade(
+                    duration: 1800.ms,
+                    delay: 1000.ms,
+                  )
+                  .scale(delay: 1000.ms),
             ),
           ],
         );
