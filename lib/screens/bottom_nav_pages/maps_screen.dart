@@ -86,7 +86,7 @@ class MapsScreenState extends State<MapsScreen> {
                   )
                       .animate()
                       .fade(
-                        duration: 1800.ms,
+                        duration: 1500.ms,
                         delay: 1000.ms,
                       )
                       .scale(delay: 1200.ms),
@@ -103,7 +103,7 @@ class MapsScreenState extends State<MapsScreen> {
                   )
                       .animate()
                       .fade(
-                        duration: 1800.ms,
+                        duration: 1500.ms,
                         delay: 1000.ms,
                       )
                       .scale(delay: 1000.ms),
@@ -140,7 +140,7 @@ class MapsScreenState extends State<MapsScreen> {
               )
                   .animate()
                   .fade(
-                    duration: 1800.ms,
+                    duration: 1500.ms,
                     delay: 1000.ms,
                   )
                   .scale(delay: 1000.ms),
@@ -261,7 +261,7 @@ class MapsScreenState extends State<MapsScreen> {
               )
                   .animate()
                   .fade(
-                    duration: 1800.ms,
+                    duration: 1500.ms,
                     delay: 1000.ms,
                   )
                   .scale(delay: 1000.ms),
@@ -286,7 +286,7 @@ class MapsScreenState extends State<MapsScreen> {
               )
                   .animate()
                   .fade(
-                    duration: 1800.ms,
+                    duration: 1500.ms,
                     delay: 1000.ms,
                   )
                   .scale(delay: 1000.ms),

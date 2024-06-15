@@ -38,7 +38,7 @@ class MapViewModel extends BaseViewModel {
       // Load the image from assets
       ByteData byteData;
       if (loadPriceMarker) {
-        byteData = await bitmapDescriptorFromSvgAsset(context, '\$500') ??
+        byteData = await bitmapDescriptorFromSvgAsset(context, '500 mn ₽') ??
             // ignore: use_build_context_synchronously
             await DefaultAssetBundle.of(context)
                 .load('assets/icons/orange_container.png');
@@ -53,7 +53,7 @@ class MapViewModel extends BaseViewModel {
 
       // Resize the image (increase the size)
       img.Image resizedImage = img.copyResize(originalImage!,
-          width: loadPriceMarker ? 180 : 125, height: 125);
+          width: loadPriceMarker ? 200 : 125, height: 125);
 
       // Convert the image to a Uint8List
       final Uint8List resizedImageData =
@@ -73,9 +73,9 @@ class MapViewModel extends BaseViewModel {
     // Read SVG file as String
 
     String svgStrings =
-        '''<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50" viewBox="0 0 100 50">
-    <rect x="5" y="5" rx="10" ry="10" width="190" height="140" style="fill:#FFA500;stroke-width:1;stroke:#FFA500"/>
-     <text x="50" y="30" font-family="Arial" font-size="26" fill="white" text-anchor="middle" dominant-baseline="middle">$price</text> 
+        '''<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50" viewBox="0 0 400 210">
+    <rect x="5" y="5" rx="25" ry="25" width="190" height="100" style="fill:#FFA500;stroke-width:1;stroke:#FFA500"/>
+     <text x="100" y="60" font-family="Arial" font-size="30" fill="white" text-anchor="middle" dominant-baseline="middle">$price</text> 
 </svg>
 ''';
 
@@ -86,7 +86,7 @@ class MapViewModel extends BaseViewModel {
     // Convert to ui.Image. toImage() takes width and height as parameters
     // you need to find the best size to suit your needs and take into account the
     // screen DPI
-    ui.Image image = await pictureInfo.picture.toImage(180, 125);
+    ui.Image image = await pictureInfo.picture.toImage(200, 100);
     return await image.toByteData(format: ui.ImageByteFormat.png);
   }
 

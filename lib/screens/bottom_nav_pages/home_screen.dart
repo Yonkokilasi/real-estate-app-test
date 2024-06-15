@@ -233,9 +233,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       .animate()
                       .fade(
                         duration: 2200.ms,
-                        delay: 4200.ms,
+                        delay: 3500.ms,
                       )
-                      .scale(delay: 4200.ms),
+                      .scale(delay: 3500.ms),
                   const SizedBox(
                     width: 10,
                   ),
@@ -286,9 +286,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       .animate()
                       .fade(
                         duration: 2200.ms,
-                        delay: 4200.ms,
+                        delay: 3500.ms,
                       )
-                      .scale(delay: 4200.ms),
+                      .scale(delay: 3500.ms),
                 ],
               ),
             ),
