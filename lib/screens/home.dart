@@ -134,9 +134,7 @@ class _HomeState extends State<Home> {
             .slideY(begin: 1.0, end: 0.0, delay: 2000.ms),
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.dark,
-          child: SafeArea(
-            child: _pages.elementAt(model.selectedBottomNavIndex),
-          ),
+          child: _pages.elementAt(model.selectedBottomNavIndex),
         ),
       ),
     );
