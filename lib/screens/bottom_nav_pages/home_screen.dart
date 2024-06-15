@@ -36,13 +36,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   changeOpacity() {
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 0), () {
       setState(() {
         opacity = opacity == 0.0 ? 0.9 : 0.0;
         perfectPlaceVisibility = true;
       });
     });
-    Future.delayed(const Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 0), () {
       setState(() {
         invisibleContainerVisibility = false;
         perfectPlaceVisibility = true;
@@ -100,9 +100,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                       .animate()
                       .fadeIn(
-                          duration: 3000.ms, curve: Curves.easeIn, begin: 0.0)
+                          duration: 1500.ms, curve: Curves.easeIn, begin: 0.0)
                       .slide(
-                        delay: 800.ms,
                         curve: Curves.easeIn,
                         begin: const Offset(-1.0, 0.0),
                         end: Offset.zero,
@@ -114,7 +113,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     foregroundImage: NetworkImage(
                       potentialPortraits.first,
                     ),
-                  ).animate().slide(duration: 3000.ms).scale(delay: 500.ms),
+                  )
+                      .animate()
+                      .slide(duration: 1500.ms)
+                      .scale()
+                      .then(delay: Duration(milliseconds: 100)),
                 ],
               ),
             ),
@@ -131,7 +134,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   const Text(
                     'Hi, Marina',
                     style: TextStyle(fontSize: 22.5, color: kAccent),
-                  ).animate().fadeIn(duration: 1000.ms).show(delay: 1000.ms),
+                  )
+                      .animate()
+                      .fadeIn(
+                        delay: 2000.ms,
+                        duration: 1000.ms,
+                        curve: Curves.easeIn,
+                        begin: 0.0,
+                      )
+                      .slideX(begin: 0.0, end: 0.0, delay: 1000.ms),
                   Visibility(
                     visible: perfectPlaceVisibility,
                     child: const Text(
@@ -143,11 +154,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                         .animate()
                         .fadeIn(
-                          duration: 500.ms,
+                          delay: 3000.ms,
+                          duration: 2000.ms,
                           curve: Curves.easeIn,
                           begin: 0.0,
                         )
-                        .slideY(begin: 1.0, end: 0.0, delay: 2000.ms),
+                        .slideY(begin: 1.0, end: 0.0, delay: 1000.ms),
                   ),
                   Visibility(
                     visible: invisibleContainerVisibility,
@@ -197,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Countup(
                             begin: 0,
                             end: 1034,
-                            duration: const Duration(seconds: 6),
+                            duration: const Duration(seconds: 7),
                             separator: ' ',
                             style: textTheme.displayLarge?.copyWith(
                               color: Pallete.whiteColor,
@@ -216,7 +228,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                  ).animate().fade(duration: 1200.ms).scale(delay: 2700.ms),
+                  )
+                      .animate()
+                      .fade(
+                        duration: 2200.ms,
+                        delay: 4200.ms,
+                      )
+                      .scale(delay: 4200.ms),
                   const SizedBox(
                     width: 10,
                   ),
@@ -245,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Countup(
                           begin: 0,
                           end: 2212,
-                          duration: const Duration(seconds: 6),
+                          duration: const Duration(seconds: 7),
                           separator: ' ',
                           style: textTheme.displayLarge?.copyWith(
                             color: kAccent,
@@ -263,7 +281,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     )),
-                  ).animate().fade(duration: 1200.ms).scale(delay: 2700.ms),
+                  )
+                      .animate()
+                      .fade(
+                        duration: 2200.ms,
+                        delay: 4200.ms,
+                      )
+                      .scale(delay: 4200.ms),
                 ],
               ),
             ),
@@ -271,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 35,
             ),
             Container(
-              height: 0.79.sh,
+              height: 0.82.sh,
               width: 1.sw,
               decoration: const BoxDecoration(
                 color: Pallete.whiteColor,
@@ -281,32 +305,29 @@ class _HomeScreenState extends State<HomeScreen> {
                   topRight: Radius.circular(35),
                 ),
               ),
-              child: Column(
-                children: [
-                  Container(
-                    width: 1.sw,
-                    height: 180.h,
-                    margin: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Pallete.whiteColor,
-                      borderRadius: BorderRadius.circular(30),
-                      image: DecorationImage(
-                          image: NetworkImage(apartmentInteriors.first),
-                          fit: BoxFit.cover),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.all(8),
+                      child: HouseItem(
+                        width: 1.sw,
+                        height: 180.h,
+                        imageUrl: apartmentInteriors.first,
+                        houseName: 'Gladkova St,. 25',
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Row(
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         HouseItem(
                           width: 0.47.sw,
-                          height: 260.h,
+                          height: 279.h,
                           borderRadius: 20,
                           houseName: 'Gubina St,. 11',
                           margin: const EdgeInsets.only(right: 3),
@@ -325,6 +346,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               margin: const EdgeInsets.only(bottom: 12),
                               imageUrl: apartmentInteriors[3],
                             ),
+                            const SizedBox(
+                              height: 10,
+                            ),
                             HouseItem(
                               houseName: 'Sedova St,. 22',
                               width: 0.47.sw,
@@ -337,17 +361,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             )
                 .animate()
-                .fadeIn(duration: 2000.ms, curve: Curves.easeIn, begin: 0.0)
+                .fadeIn(
+                    duration: 1500.ms,
+                    delay: 5000.ms,
+                    curve: Curves.easeIn,
+                    begin: 0.0)
                 .slide(
                   begin: const Offset(0.0, 1.0),
                   end: Offset.zero,
                   curve: Curves.easeIn,
-                  delay: 2500.ms,
+                  delay: 4500.ms,
                 ),
           ],
         ),

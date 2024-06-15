@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:real_estate_app/gen/assets.gen.dart';
 import 'package:real_estate_app/screens/bottom_nav_pages/home_screen.dart';
 import 'package:real_estate_app/screens/bottom_nav_pages/maps_screen.dart';
@@ -133,7 +134,15 @@ class _HomeState extends State<Home> {
             )
           ],
         ),
-      ),
+      )
+          .animate()
+          .fadeIn(
+            duration: 1000.ms,
+            delay: 7800.ms,
+            curve: Curves.easeIn,
+            begin: 0.0,
+          )
+          .slideY(begin: 1.0, end: 0.0, delay: 2000.ms),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.dark,
         child: SafeArea(child: _pages.elementAt(selectedBottomNavIndex)),
