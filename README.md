@@ -1,16 +1,21 @@
-# real_estate_app
+# Real Estate App
 
-A new Flutter project.
+This project showcases the design and implementation skills for an app that enables users to quickly find real estate for rent and purchase. **Note:** Only the design is currently implemented; functionality will be added soon.
+
+[View Designs on Dribbble](https://dribbble.com/shots/23780608-Real-Estate-App)
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To get started with this project, ensure you have the following tools installed on your machine:
 
-A few resources to get you started if this is your first Flutter project:
+- **Flutter** (version >=3.19.0 <3.19.5)
+- **Dart** (version >=3.3.0 <4.0.0)
+- **Android Studio**
+- **Visual Studio Code** (optional, but recommended)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/yourusername/real-estate-app.git
+   cd real-estate-app
