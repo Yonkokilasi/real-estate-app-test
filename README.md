@@ -17,5 +17,28 @@ To get started with this project, ensure you have the following tools installed 
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/yourusername/real-estate-app.git
+   git clone https://github.com/Yonkokilasi/real-estate-app-test.git
    cd real-estate-app
+   
+2. **Install Dependencies**
+   ```bash
+   flutter pub get
+   flutter pub run build_runner build
+3. **Running the App**
+   ```bash
+   flutter run
+
+### Troubleshooting
+## Common Issues
+
+1. **Flutter SDK not found**
+
+Ensure you have installed Flutter correctly and added it to your system PATH.
+Flutter Installation Guide
+Android license status unknown
+
+Run the following command to accept Android licenses:
+```bash
+flutter doctor --android-licenses
+
+
